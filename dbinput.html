@@ -1,0 +1,52 @@
+GNU nano 5.4                                                                                                                                                                                                                                                                       dbinput.html                                                                                                                                                                                                                                                                                 <!DOCTYPE html>
+<html>
+<head>
+    <title>Button Click Example</title>
+</head>
+<body>
+    <button id="myButton" onclick="sendRequest()">Submit</button>
+    <script type="text/javascript">
+        function sendRequest() {
+            // Get the parameter values from the HTML form
+            var nisn = document.getElementById('nisn').value;
+            var nama = document.getElementById('nama').value;
+            var sekolah = document.getElementById('sekolah').value;
+            var alamat = document.getElementById('alamat').value;
+            var ayah = document.getElementById('ayah').value;
+            var ibu = document.getElementById('ibu').value;
+            var telp = document.getElementById('telp').value;
+            // Send an AJAX request to the PHP script with the parameters in the query string
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 || this.status === 200) {
+                    document.getElementById("dbdiv").innerHTML=this.responseText;
+                }
+            };
+            xhr.open('GET', 'db.php?nisn=' + encodeURIComponent(nisn) + '&nama=' + encodeURIComponent(nama) + '&sekolah=' + encodeURIComponent(sekolah) + '&alamat=' + encodeURIComponent(alamat) + '&ayah=' + encodeURIComponent(ayah) + '&ibu=' + encodeURIComponent(ibu) + '&telp=' + encodeURIComponent(telp), true);
+            xhr.send();
+        }
+    </script>
+    <form>
+        <label for="nisn">NISN:</label><br>
+        <input type="text" id="nisn" name="nisn"><br>
+        <label for="nama">Nama:</label><br>
+        <input type="text" id="nama" name="nama"><br>
+        <label for="sekolah">Asal Sekolah:</label><br>
+        <input type="text" id="sekolah" name="sekolah"><br>
+        <label for="alamat">Alamat:</label><br>
+        <input type="text" id="alamat" name="alamat"><br>
+        <label for="ayah">Nama AyahParameter 2:</label><br>
+        <input type="text" id="ayah" name="ayah"><br>
+        <label for="ibu">Nama Ibu:</label><br>
+        <input type="text" id="ibu" name="ibu"><br>
+        <label for="telp">Telepon:</label><br>
+        <input type="text" id="telp" name="telp"><br>
+    </form>
+    <div id="dbdiv">
+
+    </div>
+</body>
+</html>
+
+
+
